@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MixxxControllerPreset mixxxVersion="2.0+" schemaVersion="1">
+    <info>
+        <name>Pioneer DDJ-WeGO3</name>
+        <author>Matthew Scott</author>
+        <description>Pioneer DDJ-WeGO3</description>
+        <forums>...</forums>
+        <wiki>http://mixxx.org/wiki/doku.php/pioneer_ddj-wego3</wiki>
+    </info>
+    <controller id="PIONEER">
+        <scriptfiles>
+            <file functionprefix="PioneerDDJWeGO3" filename="Pioneer-DDJ-WeGO3-scripts.js"/>
+        </scriptfiles>
+        <controls>
+
+            <control><group>[Global]</group>  <key>PioneerDDJWeGO3.browseKnob</key>             <status>0xB6</status> <midino>0x40</midino> <options><script-binding/></options></control>
+            <control><group>[Global]</group>  <key>PioneerDDJWeGO3.browseButton</key>           <status>0x96</status> <midino>0x41</midino> <options><script-binding/></options></control>
+            <control><group>[Global]</group>  <key>PioneerDDJWeGO3.shiftButton</key>            <status>0x96</status> <midino>0x4F</midino> <options><script-binding/></options></control>
+
+            <control><group>[Master]</group>  <key>PioneerDDJWeGO3.headphoneCueButton</key>     <status>0x96</status> <midino>0x5B</midino> <options><script-binding/></options></control>
+            <control><group>[Master]</group>  <key>PioneerDDJWeGO3.crossFaderMSB</key>          <status>0xB6</status> <midino>0x1F</midino> <options><script-binding/></options></control>
+            <control><group>[Master]</group>  <key>PioneerDDJWeGO3.crossFaderLSB</key>          <status>0xB6</status> <midino>0x3F</midino> <options><script-binding/></options></control>
+
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.playButton</key>             <status>0x90</status> <midino>0x0B</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cueButton</key>              <status>0x90</status> <midino>0x0C</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.playButtonShifted</key>      <status>0x90</status> <midino>0x47</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cueButtonShifted</key>       <status>0x90</status> <midino>0x48</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.loopHalfButton</key>         <status>0x90</status> <midino>0x12</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.loopDoubleButton</key>       <status>0x90</status> <midino>0x13</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.loopButton</key>             <status>0x90</status> <midino>0x14</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x2E</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x2F</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x30</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x31</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x3C</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x3E</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x40</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x42</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.syncButton</key>             <status>0x90</status> <midino>0x58</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cueSamplerToggleButton</key> <status>0x90</status> <midino>0x59</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.fxButton</key>               <status>0x94</status> <midino>0x43</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.fxButton</key>               <status>0x94</status> <midino>0x44</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.fxButton</key>               <status>0x94</status> <midino>0x45</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.loadButton</key>             <status>0x96</status> <midino>0x46</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.headphoneCueButton</key>     <status>0x96</status> <midino>0x54</midino> <options><script-binding/></options></control>
+
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.tempoSliderMSB</key>         <status>0xB0</status> <midino>0x00</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.tempoSliderLSB</key>         <status>0xB0</status> <midino>0x20</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.filterHighKnobMSB</key>      <status>0xB6</status> <midino>0x07</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.filterHighKnobLSB</key>      <status>0xB6</status> <midino>0x27</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.filterMidKnobMSB</key>       <status>0xB6</status> <midino>0x0B</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.filterMidKnobLSB</key>       <status>0xB6</status> <midino>0x2B</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.filterLowKnobMSB</key>       <status>0xB6</status> <midino>0x0F</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.filterLowKnobLSB</key>       <status>0xB6</status> <midino>0x2F</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.deckFaderMSB</key>           <status>0xB6</status> <midino>0x13</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.deckFaderLSB</key>           <status>0xB6</status> <midino>0x33</midino> <options><script-binding/></options></control>
+
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogRingTick</key>            <status>0xB0</status> <midino>0x21</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogPlatterTick</key>         <status>0xB0</status> <midino>0x22</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogTouch</key>               <status>0x90</status> <midino>0x36</midino> <options><script-binding/></options></control>
+
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.playButton</key>             <status>0x91</status> <midino>0x0B</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cueButton</key>              <status>0x91</status> <midino>0x0C</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.playButtonShifted</key>      <status>0x91</status> <midino>0x47</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cueButtonShifted</key>       <status>0x91</status> <midino>0x48</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.loopHalfButton</key>         <status>0x91</status> <midino>0x12</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.loopDoubleButton</key>       <status>0x91</status> <midino>0x13</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.loopButton</key>             <status>0x91</status> <midino>0x14</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x2E</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x2F</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x30</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x31</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x3C</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x3E</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x40</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x42</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.syncButton</key>             <status>0x91</status> <midino>0x58</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cueSamplerToggleButton</key> <status>0x91</status> <midino>0x59</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.fxButton</key>               <status>0x95</status> <midino>0x43</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.fxButton</key>               <status>0x95</status> <midino>0x44</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.fxButton</key>               <status>0x95</status> <midino>0x45</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.loadButton</key>             <status>0x96</status> <midino>0x47</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.headphoneCueButton</key>     <status>0x96</status> <midino>0x55</midino> <options><script-binding/></options></control>
+
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.tempoSliderMSB</key>         <status>0xB1</status> <midino>0x00</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.tempoSliderLSB</key>         <status>0xB1</status> <midino>0x20</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.filterHighKnobMSB</key>      <status>0xB6</status> <midino>0x08</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.filterHighKnobLSB</key>      <status>0xB6</status> <midino>0x28</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.filterMidKnobMSB</key>       <status>0xB6</status> <midino>0x0C</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.filterMidKnobLSB</key>       <status>0xB6</status> <midino>0x2C</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.filterLowKnobMSB</key>       <status>0xB6</status> <midino>0x10</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.filterLowKnobLSB</key>       <status>0xB6</status> <midino>0x30</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.deckFaderMSB</key>           <status>0xB6</status> <midino>0x15</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.deckFaderLSB</key>           <status>0xB6</status> <midino>0x35</midino> <options><script-binding/></options></control>
+
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogRingTick</key>            <status>0xB1</status> <midino>0x21</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogPlatterTick</key>         <status>0xB1</status> <midino>0x22</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogTouch</key>               <status>0x91</status> <midino>0x36</midino> <options><script-binding/></options></control>
+
+        </controls>
+        <outputs/>
+    </controller>
+</MixxxControllerPreset>
