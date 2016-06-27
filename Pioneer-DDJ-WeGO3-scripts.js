@@ -15,6 +15,9 @@ var wego3 = PioneerDDJWeGO3;
 // =============
 
 
+// Accidental Cue button protection when volume is non-zero.
+wego3.AUDIBLE_CUE_PROTECTION = true;
+
 // Turn on scratch mode for all decks.
 wego3.ALL_SCRATCH_ON = true;
 
@@ -339,7 +342,10 @@ wego3.playButtonShifted = function (channel, control, value, status, group) {
 
 
 wego3.cueButton = function (channel, control, value, status, group) {
-  group = wego3.actualGroup(group)
+  group = wego3.actualGroup(group);
+  if (wego3.AUDIBLE_CUE_PROTECTION) {
+    value = value && !engine.getValue(group, 'volume');
+  }
   engine.setValue(group, 'cue_default', value);
 };
 
