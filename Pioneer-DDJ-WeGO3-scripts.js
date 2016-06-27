@@ -3,6 +3,7 @@
 // - properly use brake factor
 // - cancel braking when play is pressed during brake
 // - continue scratch velocity after releasing platter
+// - replace deprecated controls
 
 var PioneerDDJWeGO3 = function() {};
 
@@ -354,23 +355,24 @@ wego3.cueButtonShifted = function (channel, control, value, status, group) {
 
 
 wego3.loopHalfButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('loopHalfButton');
-  script.midiDebug(channel, control, value, status, group);
+  group = wego3.actualGroup(group);
+  engine.setValue(group, 'loop_halve', value);
 };
 
 
 wego3.loopDoubleButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('loopDoubleButton');
-  script.midiDebug(channel, control, value, status, group);
+  group = wego3.actualGroup(group);
+  engine.setValue(group, 'loop_double', value);
 };
 
 
 wego3.loopButton = function (channel, control, value, status, group) {
   if (value) {
     group = wego3.actualGroup(group);
-    engine.setValue(group, 'reloop_exit', 1);
+    script.toggleControl(group, 'reloop_exit');
+    if (!engine.getValue(group, 'reloop_exit')) {
+      engine.setValue(group, 'beatloop', 4);
+    }
   }
 };
 
