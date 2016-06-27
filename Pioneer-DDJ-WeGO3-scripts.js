@@ -394,9 +394,15 @@ wego3.hotCueButtonShifted = function (channel, control, value, status, group) {
 
 
 wego3.samplerButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('samplerButton');
-  script.midiDebug(channel, control, value, status, group);
+  group = wego3.actualGroup(group);
+  var index = (control - 0x3c) / 2;
+  var controlName = [
+    'mute',
+    'filterHighKill',
+    'filterMidKill',
+    'filterLowKill'
+  ][index];
+  engine.setValue(group, controlName, value);
 };
 
 
