@@ -24,7 +24,7 @@ wego3.BRAKE_DIRECTION = 1.0;
 
 // Sets the jogwheels sensivity. 1 is default, 2 is twice as sensitive, 0.5 is half as sensitive.
 wego3.JOG_WHEEL_SENSITIVITY =  1.0;
-wego3.JOG_WHEEL_SHIFT_FACTOR = 5.0;
+wego3.JOG_WHEEL_SHIFT_FACTOR = 10.0;
 
 // Wikka wikka wikka...
 wego3.SCRATCH_SETTINGS = {
@@ -126,6 +126,7 @@ wego3.init = function(id) {
   };
   var v = wego3.ALL_SCRATCH_ON;
   wego3.scratchMode = [v, v, v, v];
+  wego3.slipMode = [true, true, true, true];
   // Engine
   wego3.setAllSoftTakeover();
   // Lighting
@@ -135,12 +136,6 @@ wego3.init = function(id) {
   wego3.bindDeckLeds('[Left]', true);
   wego3.bindDeckLeds('[Right]', true);
   wego3.bindGlobalLeds(true);
-  // Initial slip mode.
-  wego3.slipMode = [true, true, true, true];
-  engine.setValue('[Channel1]', 'slip_enabled', 1);
-  engine.setValue('[Channel2]', 'slip_enabled', 1);
-  engine.setValue('[Channel3]', 'slip_enabled', 1);
-  engine.setValue('[Channel4]', 'slip_enabled', 1);
 
   // midi.sendShortMsg(0x9b, 0x0c, 0x01); // initialize left deck - 0x00 or 0x01
   // midi.sendShortMsg(0x9b, 0x0d, 0x01); // initialize right deck
@@ -512,6 +507,7 @@ wego3.jogPlatterTickShifted = function (channel, control, value, status, group) 
 wego3.jogTouch = function (channel, control, value, status, group) {
   group = wego3.actualGroup(group);
   var deck = wego3.groupDecks[group];
+  var playing = engine.getValue(group, 'play');
   if (wego3.scratchMode[deck]) {
     if (value) {
       engine.scratchEnable(
@@ -521,10 +517,12 @@ wego3.jogTouch = function (channel, control, value, status, group) {
         wego3.SCRATCH_SETTINGS.alpha,
         wego3.SCRATCH_SETTINGS.beta
       );
-      engine.setValue(group, 'slip_enabled', wego3.slipMode[deck]);
+      engine.setValue(group, 'slip_enabled', playing && wego3.slipMode[deck]);
     } else {
       engine.scratchDisable(deck + 1, true);
-      engine.beginTimer(50, 'wego3.disableSlip("' + group + '")', true);
+      if (playing) {
+        engine.beginTimer(50, 'wego3.disableSlip("' + group + '")', true);
+      }
     }
   }
 };
