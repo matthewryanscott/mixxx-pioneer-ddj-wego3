@@ -406,9 +406,14 @@ wego3.cueSamplerToggleButton = function (channel, control, value, status, group)
 
 
 wego3.fxButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('fxButton');
-  script.midiDebug(channel, control, value, status, group);
+  // TODO: allow holding as well as toggling
+  if (value) {
+    var fxNumber = control - 0x42;
+    group = wego3.actualGroup(group);
+    var fxGroup = '[EffectRack1_EffectUnit' + fxNumber + ']';
+    var controlName = 'group_' + group + '_enable';
+    script.toggleControl(fxGroup, controlName);
+  }
 };
 
 
