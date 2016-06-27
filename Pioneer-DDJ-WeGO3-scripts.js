@@ -33,6 +33,13 @@ wego3.SCRATCH_SETTINGS = {
   safeScratchTimeout: 20
 };
 
+wego3.BOUNCE_LOOP_INTERVALS = [
+  1 / 4,
+  1 / 2,
+  1,
+  2
+]
+
 wego3.LED_MAP = {
   headphoneCue: {'[Left]': [0x96, 0x54], '[Right]': [0x96, 0x55], '[Master]': [0x96, 0x5b]},
   // loopHalf: {'[Left]': [0x90, 0x12], '[Right]': [0x91, 0x12]},
@@ -392,8 +399,10 @@ wego3.samplerButton = function (channel, control, value, status, group) {
 
 
 wego3.samplerButtonShifted = function (channel, control, value, status, group) {
-  print('samplerButtonShifted');
-  script.midiDebug(channel, control, value, status, group);
+  group = wego3.actualGroup(group);
+  var index = (control - 0x3d) / 2;
+  var controlName = 'beatlooproll_' + wego3.BOUNCE_LOOP_INTERVALS[index] + '_activate';
+  engine.setValue(group, controlName, value);
 };
 
 
