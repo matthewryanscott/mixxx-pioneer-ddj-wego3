@@ -24,6 +24,7 @@ wego3.BRAKE_DIRECTION = 1.0;
 
 // Sets the jogwheels sensivity. 1 is default, 2 is twice as sensitive, 0.5 is half as sensitive.
 wego3.JOG_WHEEL_SENSITIVITY =  1.0;
+wego3.JOG_WHEEL_SHIFT_FACTOR = 5.0;
 
 // Wikka wikka wikka...
 wego3.SCRATCH_SETTINGS = {
@@ -479,20 +480,32 @@ wego3.jogWheelDelta = function (value) {
 };
 
 
-wego3.jogRingTick = function (channel, control, value, status, group) {
+wego3.jogRingTick = function (channel, control, value, status, group, shiftFactor) {
+  shiftFactor = shiftFactor || 1.0;
   group = wego3.actualGroup(group);
-  wego3.pitchBendFromJog(group, wego3.jogWheelDelta(value));
+  wego3.pitchBendFromJog(group, wego3.jogWheelDelta(value) * shiftFactor);
 };
 
 
-wego3.jogPlatterTick = function (channel, control, value, status, group) {
+wego3.jogRingTickShifted = function (channel, control, value, status, group) {
+  wego3.jogRingTick(channel, control, value, status, group, wego3.JOG_WHEEL_SHIFT_FACTOR);
+};
+
+
+wego3.jogPlatterTick = function (channel, control, value, status, group, shiftFactor) {
+  shiftFactor = shiftFactor || 1.0;
   group = wego3.actualGroup(group);
   var deck = wego3.groupDecks[group];
   if (wego3.scratchMode[deck]) {
-    engine.scratchTick(deck + 1, wego3.jogWheelDelta(value));
+    engine.scratchTick(deck + 1, wego3.jogWheelDelta(value) * shiftFactor);
   } else {
-    wego3.pitchBendFromJog(group, wego3.jogWheelDelta(value));
+    wego3.pitchBendFromJog(group, wego3.jogWheelDelta(value) * shiftFactor);
   }
+};
+
+
+wego3.jogPlatterTickShifted = function (channel, control, value, status, group) {
+  wego3.jogPlatterTick(channel, control, value, status, group, wego3.JOG_WHEEL_SHIFT_FACTOR);
 };
 
 
@@ -515,6 +528,9 @@ wego3.jogTouch = function (channel, control, value, status, group) {
     }
   }
 };
+
+
+wego3.jogTouchShifted = wego3.jogTouch;
 
 
 wego3.disableSlip = function (group) {
@@ -625,25 +641,3 @@ wego3.bindDeckLeds = function(group, isBinding) {
     }
   }
 };
-
-// ========================
-// Enable shifted functions
-// ========================
-
-for (var fnName in wego3) {
-  if (fnName.substr(-7) == 'Shifted') {
-    (function (fnName) {
-      var unshiftedName = fnName.substr(0, fnName.length - 7);
-      print('Setting up shifted/unshifted for ' + fnName + '/' + unshiftedName);
-      var shiftedFn = wego3[fnName];
-      var unshiftedFn = wego3[unshiftedName];
-      wego3[unshiftedName] = function (channel, control, value, status, group) {
-        if (wego3.shiftPressed) {
-          shiftedFn(channel, control, value, status, group);
-        } else {
-          unshiftedFn(channel, control, value, status, group);
-        }
-      };
-    })(fnName);
-  }
-}

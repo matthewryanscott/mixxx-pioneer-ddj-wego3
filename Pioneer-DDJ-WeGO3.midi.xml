@@ -69,7 +69,10 @@
 
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogRingTick</key>            <status>0xB0</status> <midino>0x21</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogPlatterTick</key>         <status>0xB0</status> <midino>0x22</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogRingTickShifted</key>     <status>0xB0</status> <midino>0x26</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogPlatterTickShifted</key>  <status>0xB0</status> <midino>0x27</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogTouch</key>               <status>0x90</status> <midino>0x36</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.jogTouchShifted</key>        <status>0x90</status> <midino>0x67</midino> <options><script-binding/></options></control>
 
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.playButton</key>             <status>0x91</status> <midino>0x0B</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cueButton</key>              <status>0x91</status> <midino>0x0C</midino> <options><script-binding/></options></control>
@@ -119,7 +122,10 @@
 
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogRingTick</key>            <status>0xB1</status> <midino>0x21</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogPlatterTick</key>         <status>0xB1</status> <midino>0x22</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogRingTickShifted</key>     <status>0xB1</status> <midino>0x26</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogPlatterTickShifted</key>  <status>0xB1</status> <midino>0x27</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogTouch</key>               <status>0x91</status> <midino>0x36</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.jogTouchShifted</key>        <status>0x91</status> <midino>0x67</midino> <options><script-binding/></options></control>
 
         </controls>
         <outputs/>
