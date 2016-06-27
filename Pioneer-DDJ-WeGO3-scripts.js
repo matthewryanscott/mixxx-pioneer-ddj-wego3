@@ -346,14 +346,14 @@ wego3.loopButton = function (channel, control, value, status, group) {
 };
 
 
-wego3.cuePointButton = function (channel, control, value, status, group) {
+wego3.hotCueButton = function (channel, control, value, status, group) {
   var hotCueIndex = control - 0x2d;
   group = wego3.actualGroup(group);
   engine.setValue(group, 'hotcue_' + hotCueIndex + '_activate', value);
 };
 
 
-wego3.cuePointButtonShifted = function (channel, control, value, status, group) {
+wego3.hotCueButtonShifted = function (channel, control, value, status, group) {
   var hotCueIndex = control - 0x5e;
   if (value) {
     group = wego3.actualGroup(group);
