@@ -266,7 +266,10 @@ wego3.browseButton = function (channel, control, value, status, group) {
 
 
 wego3.shiftButton = function (channel, control, value, status, group) {
+  wego3.bindDeckLeds(group, false);
+  wego3.turnOffAllLeds(group);
   wego3.shiftPressed = !!value;
+  wego3.bindDeckLeds(group, true);
 };
 
 
@@ -412,6 +415,18 @@ wego3.fxButton = function (channel, control, value, status, group) {
     group = wego3.actualGroup(group);
     var fxGroup = '[EffectRack1_EffectUnit' + fxNumber + ']';
     var controlName = 'group_' + group + '_enable';
+    script.toggleControl(fxGroup, controlName);
+  }
+};
+
+
+wego3.fxButtonShifted = function (channel, control, value, status, group) {
+  // TODO: allow holding as well as toggling
+  if (value) {
+    var fxNumber = control - 0x4c;
+    var fxGroup = '[EffectRack1_EffectUnit' + fxNumber + ']';
+    var controlName = 'group_[Headphone]_enable';
+    print('fxgroup=' + fxGroup + ' controlname=' + controlName);
     script.toggleControl(fxGroup, controlName);
   }
 };
@@ -566,11 +581,17 @@ wego3.bindGlobalLeds = function(isBinding) {
 wego3.bindDeckLeds = function(group, isBinding) {
   group = wego3.actualGroup(group);
   script.bindConnections(group, wego3.LED_CONTROL_FUNCTIONS, !isBinding);
-  // Bind effects controls (they use different group names)
+  // Effects (they use different group names)
+  var effectsGroup;
+  if (wego3.shiftPressed) {
+    effectsGroup = '[Headphone]';
+  } else {
+    effectsGroup = group;
+  }
   for (var i = 1; i <= 3; ++i) {
-    engine.connectControl('[EffectRack1_EffectUnit' + i + ']', 'group_' + group + '_enable', 'wego3.fxLed', !isBinding);
+    engine.connectControl('[EffectRack1_EffectUnit' + i + ']', 'group_' + effectsGroup + '_enable', 'wego3.fxLed', !isBinding);
     if (isBinding) {
-      engine.trigger('[EffectRack1_EffectUnit' + i + ']', 'group_' + group + '_enable');
+      engine.trigger('[EffectRack1_EffectUnit' + i + ']', 'group_' + effectsGroup + '_enable');
     }
   }
 };
