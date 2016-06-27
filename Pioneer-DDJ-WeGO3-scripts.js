@@ -17,8 +17,7 @@ var wego3 = PioneerDDJWeGO3;
 // Turn on scratch mode for all decks.
 wego3.ALL_SCRATCH_ON = true;
 
-// Brake on stop, vs. hard stop.
-wego3.BRAKE_ON_STOP = true;
+// Brake on stop settings (shift play).
 wego3.BRAKE_FACTOR = 1.0;
 wego3.BRAKE_DIRECTION = 1.0;
 
@@ -296,6 +295,7 @@ wego3.playButton = function (channel, control, value, status, group) {
   if (value) {
     group = wego3.actualGroup(group);
     deck = wego3.groupDecks[group];
+    engine.brake(deck + 1, 0);
     script.toggleControl(group, 'play');
     engine.setValue(group, 'reverseroll', 0);
   }
@@ -304,7 +304,11 @@ wego3.playButton = function (channel, control, value, status, group) {
 
 wego3.playButtonShifted = function (channel, control, value, status, group) {
   group = wego3.actualGroup(group);
-  engine.setValue(group, 'reverseroll', value);
+  if (value && engine.getValue(group, 'play')) {
+    deck = wego3.groupDecks[group];
+    engine.setValue(group, 'play', 0);
+    engine.brake(deck + 1, value, wego3.BRAKE_FACTOR, wego3.BRAKE_DIRECTION);
+  }
 };
 
 
