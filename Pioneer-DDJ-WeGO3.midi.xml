@@ -32,6 +32,10 @@
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x2F</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x30</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x90</status> <midino>0x31</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x90</status> <midino>0x5F</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x90</status> <midino>0x60</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x90</status> <midino>0x61</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x90</status> <midino>0x62</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x3C</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x3E</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x90</status> <midino>0x40</midino> <options><script-binding/></options></control>
@@ -70,6 +74,10 @@
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x2F</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x30</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButton</key>         <status>0x91</status> <midino>0x31</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x91</status> <midino>0x5F</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x91</status> <midino>0x60</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x91</status> <midino>0x61</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.cuePointButtonShifted</key>  <status>0x91</status> <midino>0x62</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x3C</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x3E</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.samplerButton</key>          <status>0x91</status> <midino>0x40</midino> <options><script-binding/></options></control>
