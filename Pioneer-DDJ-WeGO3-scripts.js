@@ -296,17 +296,8 @@ wego3.playButton = function (channel, control, value, status, group) {
   if (value) {
     group = wego3.actualGroup(group);
     deck = wego3.groupDecks[group];
-    if (wego3.BRAKE_ON_STOP) {
-      if (engine.getValue(group, 'play')) {
-        engine.brake(deck + 1, value, wego3.BRAKE_FACTOR, wego3.BRAKE_DIRECTION);
-      } else {
-        script.toggleControl(group, 'play');
-        engine.setValue(group, 'reverseroll', 0);
-      }
-    } else {
-      script.toggleControl(group, 'play');
-      engine.setValue(group, 'reverseroll', 0);
-    }
+    script.toggleControl(group, 'play');
+    engine.setValue(group, 'reverseroll', 0);
   }
 };
 
@@ -320,6 +311,12 @@ wego3.playButtonShifted = function (channel, control, value, status, group) {
 wego3.cueButton = function (channel, control, value, status, group) {
   group = wego3.actualGroup(group)
   engine.setValue(group, 'cue_default', value);
+};
+
+
+wego3.cueButtonShifted = function (channel, control, value, status, group) {
+  group = wego3.actualGroup(group);
+  engine.setValue(group, 'reverseroll', value);
 };
 
 
