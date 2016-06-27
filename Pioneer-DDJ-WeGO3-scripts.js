@@ -294,7 +294,7 @@ wego3.headphoneCueButtonShifted = function (channel, control, value, status, gro
 wego3.playButton = function (channel, control, value, status, group) {
   if (value) {
     group = wego3.actualGroup(group);
-    deck = wego3.groupDecks[group];
+    var deck = wego3.groupDecks[group];
     engine.brake(deck + 1, 0);
     script.toggleControl(group, 'play');
     engine.setValue(group, 'reverseroll', 0);
@@ -305,7 +305,7 @@ wego3.playButton = function (channel, control, value, status, group) {
 wego3.playButtonShifted = function (channel, control, value, status, group) {
   group = wego3.actualGroup(group);
   if (value && engine.getValue(group, 'play')) {
-    deck = wego3.groupDecks[group];
+    var deck = wego3.groupDecks[group];
     engine.setValue(group, 'play', 0);
     engine.brake(deck + 1, value, wego3.BRAKE_FACTOR, wego3.BRAKE_DIRECTION);
   }
