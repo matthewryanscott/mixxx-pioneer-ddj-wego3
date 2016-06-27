@@ -192,7 +192,7 @@ wego3.virtualGroup = function (group) {
 // =================
 
 
-wego3.hiResControl = function (functionName, controlName, callback, min, midMax, max) {
+wego3.hiResControl = function (functionName, controlName, callback, min, midMax, max, predicate) {
   if (callback == 'linear') {
     if (min === undefined) {
       min = 0.0;
@@ -203,8 +203,10 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
       max = midMax;
     }
     callback = function(fullValue, group) {
-      var newValue = script.absoluteLin(fullValue, min, max, 0, 0x3fff);
-      engine.setValue(group, controlName, newValue);
+      if (predicate === undefined || predicate()) {
+        var newValue = script.absoluteLin(fullValue, min, max, 0, 0x3fff);
+        engine.setValue(group, controlName, newValue);
+      }
     };
   } else if (callback == 'nonlinear') {
     if (min === undefined) {
@@ -217,8 +219,10 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
       max = 4.0;
     }
     callback = function(fullValue, group) {
-      var newValue = script.absoluteNonLin(fullValue, min, midMax, max, 0, 0x3fff);
-      engine.setValue(group, controlName, newValue);
+      if (predicate === undefined || predicate()) {
+        var newValue = script.absoluteNonLin(fullValue, min, midMax, max, 0, 0x3fff);
+        engine.setValue(group, controlName, newValue);
+      }
     };
   }
   var msbControlName = functionName + 'MSB';
@@ -239,7 +243,16 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
 // 14-bit controls
 // ===============
 
-wego3.hiResControl('crossFader', 'crossfader', 'linear', -1.0, 1.0);
+wego3.canCrossFade = function () {
+  // only allow crossfader to operate when slip mode is deactivated
+  var actualLeft = wego3.actualGroup('[Left]');
+  var actualRight = wego3.actualGroup('[Right]');
+  var deckLeft = wego3.groupDecks[actualLeft];
+  var deckRight = wego3.groupDecks[actualRight];
+  return (!wego3.slipMode[deckLeft] && !wego3.slipMode[deckRight]);
+};
+
+wego3.hiResControl('crossFader', 'crossfader', 'linear', -1.0, 1.0, null, wego3.canCrossFade);
 wego3.hiResControl('tempoSlider', 'rate', 'linear', 1.0, -1.0);
 wego3.hiResControl('filterHighKnob', 'filterHigh', 'nonlinear');
 wego3.hiResControl('filterMidKnob', 'filterMid', 'nonlinear');
