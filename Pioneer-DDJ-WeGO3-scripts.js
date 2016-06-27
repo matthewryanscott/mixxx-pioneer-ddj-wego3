@@ -126,6 +126,12 @@ wego3.init = function(id) {
   wego3.bindDeckLeds('[Left]', true);
   wego3.bindDeckLeds('[Right]', true);
   wego3.bindGlobalLeds(true);
+  // Initial slip mode.
+  wego3.slipMode = [true, true, true, true];
+  engine.setValue('[Channel1]', 'slip_enabled', 1);
+  engine.setValue('[Channel2]', 'slip_enabled', 1);
+  engine.setValue('[Channel3]', 'slip_enabled', 1);
+  engine.setValue('[Channel4]', 'slip_enabled', 1);
 
   // midi.sendShortMsg(0x9b, 0x0c, 0x01); // initialize left deck - 0x00 or 0x01
   // midi.sendShortMsg(0x9b, 0x0d, 0x01); // initialize right deck
@@ -369,10 +375,25 @@ wego3.samplerButton = function (channel, control, value, status, group) {
 };
 
 
+wego3.samplerButtonShifted = function (channel, control, value, status, group) {
+  print('samplerButtonShifted');
+  script.midiDebug(channel, control, value, status, group);
+};
+
+
 wego3.syncButton = function (channel, control, value, status, group) {
   group = wego3.actualGroup(group);
   if (value) {
     script.toggleControl(group, 'sync_enabled');
+  }
+};
+
+
+wego3.syncButtonShifted = function (channel, control, value, status, group) {
+  group = wego3.actualGroup(group);
+  if (value) {
+    var deck = wego3.groupDecks[group];
+    wego3.slipMode[deck] = !wego3.slipMode[deck];
   }
 };
 
@@ -437,10 +458,17 @@ wego3.jogTouch = function (channel, control, value, status, group) {
         wego3.SCRATCH_SETTINGS.alpha,
         wego3.SCRATCH_SETTINGS.beta
       );
+      engine.setValue(group, 'slip_enabled', wego3.slipMode[deck]);
     } else {
       engine.scratchDisable(deck + 1, true);
+      engine.beginTimer(50, 'wego3.disableSlip("' + group + '")', true);
     }
   }
+};
+
+
+wego3.disableSlip = function (group) {
+  engine.setValue(group, 'slip_enabled', false);
 };
 
 
@@ -489,7 +517,11 @@ wego3.masterCueLed = function (value, group, control) {
 };
 
 wego3.syncLed = function (value, group, control) {
+  var deck = wego3.groupDecks[group];
   group = wego3.virtualGroup(group);
+  if (!wego3.slipMode[deck]) {
+    value = !value;
+  }
   wego3.setLed(group, 'sync', value * 0x7f);
 };
 
