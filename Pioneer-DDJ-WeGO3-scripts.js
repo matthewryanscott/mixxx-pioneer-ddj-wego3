@@ -167,6 +167,12 @@ wego3.setAllSoftTakeover = function (isBinding) {
 };
 
 
+wego3.resetAllSoftTakeover = function () {
+  wego3.allChannels.
+    forEach(function (c) { wego3.resetDeckSoftTakeover(c); });
+};
+
+
 wego3.setDeckSoftTakeover = function (channel, isBinding) {
   engine.softTakeover(channel, 'pregain', isBinding);
   engine.softTakeover(channel, 'volume', isBinding);
@@ -176,6 +182,18 @@ wego3.setDeckSoftTakeover = function (channel, isBinding) {
   engine.softTakeover(channel, 'filterLow', isBinding);
   var effectRack = '[QuickEffectRack1_' + channel + ']';
   engine.softTakeover(effectRack, 'super1', isBinding);
+};
+
+
+wego3.resetDeckSoftTakeover = function (channel) {
+  engine.softTakeoverIgnoreNextValue(channel, 'pregain');
+  engine.softTakeoverIgnoreNextValue(channel, 'volume');
+  engine.softTakeoverIgnoreNextValue(channel, 'rate');
+  engine.softTakeoverIgnoreNextValue(channel, 'filterHigh');
+  engine.softTakeoverIgnoreNextValue(channel, 'filterMid');
+  engine.softTakeoverIgnoreNextValue(channel, 'filterLow');
+  var effectRack = '[QuickEffectRack1_' + channel + ']';
+  engine.softTakeoverIgnoreNextValue(effectRack, 'super1');
 };
 
 
@@ -353,6 +371,7 @@ wego3.shiftButton = function (channel, control, value, status, group) {
   wego3.turnOffAllLeds(group);
   wego3.shiftPressed = !!value;
   wego3.bindDeckLeds(group, true);
+  wego3.resetAllSoftTakeover();
 };
 
 
