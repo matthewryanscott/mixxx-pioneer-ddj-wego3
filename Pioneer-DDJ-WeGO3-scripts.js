@@ -314,9 +314,9 @@ wego3.browseButtonShifted = function (channel, control, value, status, group) {
 
 
 wego3.loadButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('loadButton');
-  script.midiDebug(channel, control, value, status, group);
+  group = wego3.actualGroup(group);
+  var playing = engine.getValue(group, 'play');
+  engine.setValue(group, 'LoadSelectedTrack', value && !playing);
 };
 
 
