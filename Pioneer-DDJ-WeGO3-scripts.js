@@ -15,8 +15,9 @@ var wego3 = PioneerDDJWeGO3;
 // =============
 
 
-// Accidental Cue button protection when volume is non-zero.
+// Accidental Cue button protection when volume is non-zero and slip is on.
 wego3.AUDIBLE_CUE_PROTECTION = true;
+wego3.AUDIBLE_PLAY_PROTECTION = true;
 
 // Turn on scratch mode for all decks.
 wego3.ALL_SCRATCH_ON = true;
@@ -311,6 +312,36 @@ wego3.hiResControl('filterLowKnob', 'filterLow', 'nonlinear');
 wego3.hiResControl('deckFader', 'volume', 'linear');
 
 
+
+// =======
+// Helpers
+// =======
+
+
+wego3.isAudible = function (group) {
+  return engine.getValue(group, 'volume');
+};
+
+
+wego3.isPlaying = function (group) {
+  return engine.getValue(group, 'play');
+};
+
+
+wego3.isSlipMode = function (group) {
+  var deck = wego3.groupDecks[group];
+  return wego3.slipMode[deck];
+};
+
+
+wego3.playProtectedValue = function (group, value) {
+  var slipMode = wego3.isSlipMode(group);
+  var audible = wego3.isAudible(group);
+  var playing = wego3.isPlaying(group);
+  return value && (!slipMode || !audible || (audible && !playing));
+};
+
+
 // =======
 // Buttons
 // =======
@@ -403,8 +434,11 @@ wego3.headphoneCueButtonWhileShiftPressed = function (channel, control, value, s
 
 
 wego3.playButton = function (channel, control, value, status, group) {
+  group = wego3.actualGroup(group);
+  if (wego3.AUDIBLE_PLAY_PROTECTION) {
+    value = wego3.playProtectedValue(group, value);
+  }
   if (value) {
-    group = wego3.actualGroup(group);
     var deck = wego3.groupDecks[group];
     engine.brake(deck + 1, 0);
     script.toggleControl(group, 'play');
@@ -426,7 +460,7 @@ wego3.playButtonShifted = function (channel, control, value, status, group) {
 wego3.cueButton = function (channel, control, value, status, group) {
   group = wego3.actualGroup(group);
   if (wego3.AUDIBLE_CUE_PROTECTION) {
-    value = value && !engine.getValue(group, 'volume');
+    value = wego3.playProtectedValue(group, value);
   }
   engine.setValue(group, 'cue_default', value);
 };
@@ -637,7 +671,6 @@ wego3.setLed = function (group, name, value) {
   var command = ledInfo[0];
   var midino = ledInfo[1];
   midi.sendShortMsg(command, midino, value);
-  print('command=' + command + ' midino=' + midino + ' value=' + value);
 };
 
 wego3.turnOffAllLeds = function (group) {
