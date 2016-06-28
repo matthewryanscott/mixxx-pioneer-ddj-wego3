@@ -686,7 +686,7 @@ wego3.playLed = function (value, group, control) {
 
 wego3.headphoneCueLed = function (value, group, control) {
   group = wego3.virtualGroup(group);
-  wego3.setLed(group, 'headphoneCue', value * 0x7f);
+  wego3.setLed(group, 'headphoneCue', !!value * 0x7f);
 };
 
 wego3.masterCueLed = function (value, group, control) {
@@ -700,7 +700,7 @@ wego3.syncLed = function (value, group, control) {
   if (!wego3.slipMode[deck]) {
     value = !value;
   }
-  wego3.setLed(group, 'sync', value * 0x7f);
+  wego3.setLed(group, 'sync', !!value * 0x7f);
 };
 
 wego3.hotCueLed = function (value, group, control) {
@@ -708,7 +708,7 @@ wego3.hotCueLed = function (value, group, control) {
     if (control === 'hotcue_' + i + '_enabled') {
       var ledName = 'cuePoint' + i;
       group = wego3.virtualGroup(group);
-      wego3.setLed(group, ledName, value * 0x7f);
+      wego3.setLed(group, ledName, !!value * 0x7f);
     }
   }
 };
@@ -723,7 +723,7 @@ wego3.fxLed = function (value, group, control) {
         var ledName = 'fx' + fx;
         var actual = '[Channel' + cn + ']';
         var virtual = wego3.virtualGroup(actual);
-        wego3.setLed(virtual, ledName, value * 0x7f);
+        wego3.setLed(virtual, ledName, !!value * 0x7f);
       }
     }
   }
