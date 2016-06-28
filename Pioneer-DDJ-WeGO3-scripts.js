@@ -545,6 +545,7 @@ wego3.syncButtonShifted = function (channel, control, value, status, group) {
   if (value) {
     var deck = wego3.groupDecks[group];
     wego3.slipMode[deck] = !wego3.slipMode[deck];
+    wego3.syncLed(0, group);
   }
 };
 
