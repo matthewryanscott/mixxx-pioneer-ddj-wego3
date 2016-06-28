@@ -168,6 +168,7 @@ wego3.setAllSoftTakeover = function (isBinding) {
 
 
 wego3.setDeckSoftTakeover = function (channel, isBinding) {
+  engine.softTakeover(channel, 'pregain', isBinding);
   engine.softTakeover(channel, 'volume', isBinding);
   engine.softTakeover(channel, 'rate', isBinding);
   engine.softTakeover(channel, 'filterHigh', isBinding);
@@ -202,7 +203,7 @@ wego3.virtualGroup = function (group) {
 // =================
 
 
-wego3.hiResControl = function (functionName, controlName, callback, min, midMax, max, predicate) {
+wego3.hiResControl = function (functionName, controlName, callback, min, midMax, max, predicate, shifted, groupNameFn) {
   if (callback == 'linear') {
     if (min === undefined) {
       min = 0.0;
@@ -213,8 +214,15 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
       max = midMax;
     }
     callback = function(fullValue, group) {
-      if (predicate === undefined || predicate()) {
+      if (!!wego3.shiftPressed != !!shifted) {
+        return;
+      }
+      if (!predicate || predicate()) {
         var newValue = script.absoluteLin(fullValue, min, max, 0, 0x3fff);
+        if (groupNameFn) {
+          group = groupNameFn(group);
+        }
+        print(group);
         engine.setValue(group, controlName, newValue);
       }
     };
@@ -229,14 +237,20 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
       max = 4.0;
     }
     callback = function(fullValue, group) {
-      if (predicate === undefined || predicate()) {
+      if (!predicate || predicate()) {
         var newValue = script.absoluteNonLin(fullValue, min, midMax, max, 0, 0x3fff);
+        if (groupNameFn) {
+          group = groupNameFn(group);
+        }
+        print(group);
         engine.setValue(group, controlName, newValue);
       }
     };
   }
-  var msbControlName = functionName + 'MSB';
-  var lsbControlName = functionName + 'LSB';
+  shifted = shifted ? 'WhileShiftPressed' : '';
+  var msbControlName = functionName + 'MSB' + shifted;
+  var lsbControlName = functionName + 'LSB' + shifted;
+  var functionName = functionName + shifted;
   wego3[msbControlName] = function (channel, control, value, status, group) {
     group = wego3.actualGroup(group);
     wego3.highResMSB[group][functionName] = value;
@@ -244,6 +258,7 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
   wego3[lsbControlName] = function (channel, control, value, status, group) {
     group = wego3.actualGroup(group);
     var fullValue = (wego3.highResMSB[group][functionName] << 7) + value;
+    print(fullValue + ' ' + group + ' ' + functionName);
     callback(fullValue, group);
   };
 };
@@ -262,10 +277,18 @@ wego3.canCrossFade = function () {
   return (!wego3.slipMode[deckLeft] && !wego3.slipMode[deckRight]);
 };
 
+
+wego3.quickEffectRackGroup = function (group) {
+  return '[QuickEffectRack1_' + group + ']';
+};
+
+
 wego3.hiResControl('crossFader', 'crossfader', 'linear', -1.0, 1.0, null, wego3.canCrossFade);
 wego3.hiResControl('tempoSlider', 'rate', 'linear', 1.0, -1.0);
+wego3.hiResControl('filterHighKnob', 'super1', 'linear', 0, 1.0, null, null, true, wego3.quickEffectRackGroup);
 wego3.hiResControl('filterHighKnob', 'filterHigh', 'nonlinear');
 wego3.hiResControl('filterMidKnob', 'filterMid', 'nonlinear');
+wego3.hiResControl('filterMidKnob', 'pregain', 'nonlinear', 0.0, 1.0, 4.0, null, true);
 wego3.hiResControl('filterLowKnob', 'filterLow', 'nonlinear');
 wego3.hiResControl('deckFader', 'volume', 'linear');
 
@@ -686,6 +709,7 @@ wego3.bindDeckLeds = function(group, isBinding) {
 // ========================
 
 for (var fnName in wego3) {
+  print(fnName);
   if (fnName.substr(-17) == 'WhileShiftPressed') {
     (function (fnName) {
       var unshiftedName = fnName.substr(0, fnName.length - 17);
