@@ -15,7 +15,9 @@
 
             <control><group>[Global]</group>  <key>PioneerDDJWeGO3.browseKnob</key>             <status>0xB6</status> <midino>0x40</midino> <options><script-binding/></options></control>
             <control><group>[Global]</group>  <key>PioneerDDJWeGO3.browseButton</key>           <status>0x96</status> <midino>0x41</midino> <options><script-binding/></options></control>
+            <control><group>[Global]</group>  <key>PioneerDDJWeGO3.browseButtonShifted</key>    <status>0x96</status> <midino>0x42</midino> <options><script-binding/></options></control>
             <control><group>[Global]</group>  <key>PioneerDDJWeGO3.shiftButton</key>            <status>0x96</status> <midino>0x4F</midino> <options><script-binding/></options></control>
+            <control><group>[Global]</group>  <key>PioneerDDJWeGO3.browseKnobShifted</key>      <status>0xB6</status> <midino>0x64</midino> <options><script-binding/></options></control>
 
             <control><group>[Master]</group>  <key>PioneerDDJWeGO3.headphoneCueButton</key>     <status>0x96</status> <midino>0x5B</midino> <options><script-binding/></options></control>
             <control><group>[Master]</group>  <key>PioneerDDJWeGO3.crossFaderMSB</key>          <status>0xB6</status> <midino>0x1F</midino> <options><script-binding/></options></control>
@@ -55,6 +57,7 @@
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.fxButtonShifted</key>        <status>0x94</status> <midino>0x4F</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.loadButton</key>             <status>0x96</status> <midino>0x46</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.headphoneCueButton</key>     <status>0x96</status> <midino>0x54</midino> <options><script-binding/></options></control>
+            <control><group>[Left]</group>    <key>PioneerDDJWeGO3.loadButtonShifted</key>      <status>0x96</status> <midino>0x58</midino> <options><script-binding/></options></control>
 
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.tempoSliderMSB</key>         <status>0xB0</status> <midino>0x00</midino> <options><script-binding/></options></control>
             <control><group>[Left]</group>    <key>PioneerDDJWeGO3.tempoSliderLSB</key>         <status>0xB0</status> <midino>0x20</midino> <options><script-binding/></options></control>
@@ -108,6 +111,7 @@
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.fxButtonShifted</key>        <status>0x95</status> <midino>0x4F</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.loadButton</key>             <status>0x96</status> <midino>0x47</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.headphoneCueButton</key>     <status>0x96</status> <midino>0x55</midino> <options><script-binding/></options></control>
+            <control><group>[Right]</group>   <key>PioneerDDJWeGO3.loadButtonShifted</key>      <status>0x96</status> <midino>0x59</midino> <options><script-binding/></options></control>
 
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.tempoSliderMSB</key>         <status>0xB1</status> <midino>0x00</midino> <options><script-binding/></options></control>
             <control><group>[Right]</group>   <key>PioneerDDJWeGO3.tempoSliderLSB</key>         <status>0xB1</status> <midino>0x20</midino> <options><script-binding/></options></control>

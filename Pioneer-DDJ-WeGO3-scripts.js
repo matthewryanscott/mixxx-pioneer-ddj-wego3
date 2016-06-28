@@ -29,6 +29,9 @@ wego3.BRAKE_DIRECTION = 1.0;
 wego3.JOG_WHEEL_SENSITIVITY =  1.0;
 wego3.JOG_WHEEL_SHIFT_FACTOR = 10.0;
 
+// Browser
+wego3.BROWSE_KNOB_SHIFT_FACTOR = 10;
+
 // Wikka wikka wikka...
 wego3.SCRATCH_SETTINGS = {
   alpha: 1.0 / 8,
@@ -271,16 +274,55 @@ wego3.hiResControl('deckFader', 'volume', 'linear');
 // Buttons
 // =======
 
-wego3.browseKnob = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('browseKnob');
-  script.midiDebug(channel, control, value, status, group);
+
+wego3.browseKnobDirection = function (value) {
+  if (value == 0x01) {
+    return 1;
+  } else if (value == 0x7f) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
+
+
+wego3.browseKnob = function (channel, control, value, status, group, shiftFactor) {
+  shiftFactor = shiftFactor || 1;
+  group = wego3.actualGroup(group);
+  var direction = wego3.browseKnobDirection(value);
+  engine.setValue('[Playlist]', 'SelectTrackKnob', direction * shiftFactor);
+};
+
+
+wego3.browseKnobShifted = function (channel, control, value, status, group) {
+  wego3.browseKnob(channel, control, value, status, group, wego3.BROWSE_KNOB_SHIFT_FACTOR);
 };
 
 
 wego3.browseButton = function (channel, control, value, status, group) {
   // ********** :::::: TODO ::::: ********** //
   print('browseButton');
+  script.midiDebug(channel, control, value, status, group);
+};
+
+
+wego3.browseButtonShifted = function (channel, control, value, status, group) {
+  // ********** :::::: TODO ::::: ********** //
+  print('browseButtonShifted');
+  script.midiDebug(channel, control, value, status, group);
+};
+
+
+wego3.loadButton = function (channel, control, value, status, group) {
+  // ********** :::::: TODO ::::: ********** //
+  print('loadButton');
+  script.midiDebug(channel, control, value, status, group);
+};
+
+
+wego3.loadButtonShifted = function (channel, control, value, status, group) {
+  // ********** :::::: TODO ::::: ********** //
+  print('loadButtonShifted');
   script.midiDebug(channel, control, value, status, group);
 };
 
@@ -461,13 +503,6 @@ wego3.fxButtonShifted = function (channel, control, value, status, group) {
     print('fxgroup=' + fxGroup + ' controlname=' + controlName);
     script.toggleControl(fxGroup, controlName);
   }
-};
-
-
-wego3.loadButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('loadButton');
-  script.midiDebug(channel, control, value, status, group);
 };
 
 
