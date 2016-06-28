@@ -1,10 +1,3 @@
-// ********** :::::: TODO ::::: ********** // LIST
-// =========
-// - properly use brake factor
-// - cancel braking when play is pressed during brake
-// - continue scratch velocity after releasing platter
-// - replace deprecated controls
-
 var PioneerDDJWeGO3 = function() {};
 
 var wego3 = PioneerDDJWeGO3;
