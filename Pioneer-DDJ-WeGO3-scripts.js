@@ -300,16 +300,12 @@ wego3.browseKnobShifted = function (channel, control, value, status, group) {
 
 
 wego3.browseButton = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('browseButton');
-  script.midiDebug(channel, control, value, status, group);
+  // TODO
 };
 
 
 wego3.browseButtonShifted = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('browseButtonShifted');
-  script.midiDebug(channel, control, value, status, group);
+  engine.setValue('[Playlist]', 'ToggleSelectedSidebarItem', value);
 };
 
 
@@ -321,9 +317,11 @@ wego3.loadButton = function (channel, control, value, status, group) {
 
 
 wego3.loadButtonShifted = function (channel, control, value, status, group) {
-  // ********** :::::: TODO ::::: ********** //
-  print('loadButtonShifted');
-  script.midiDebug(channel, control, value, status, group);
+  if (group == '[Left]') {
+    engine.setValue('[Playlist]', 'SelectPrevPlaylist', value);
+  } else if (group == '[Right]') {
+    engine.setValue('[Playlist]', 'SelectNextPlaylist', value);
+  }
 };
 
 
