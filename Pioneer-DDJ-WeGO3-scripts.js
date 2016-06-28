@@ -348,7 +348,7 @@ wego3.headphoneCueButton = function (channel, control, value, status, group) {
 
 // When A or B headphone select is pressed while shifted,
 // toggle the deck that is being controlled by that side.
-wego3.headphoneCueButtonShifted = function (channel, control, value, status, group) {
+wego3.headphoneCueButtonWhileShiftPressed = function (channel, control, value, status, group) {
   if (value && group !== '[Master]') {
     var currentActualGroup = wego3.actualGroup(group);
     var newActualGroup = wego3.actualGroupToggleMap[currentActualGroup];
@@ -678,3 +678,27 @@ wego3.bindDeckLeds = function(group, isBinding) {
     }
   }
 };
+
+
+
+// ========================
+// Enable shifted functions
+// ========================
+
+for (var fnName in wego3) {
+  if (fnName.substr(-17) == 'WhileShiftPressed') {
+    (function (fnName) {
+      var unshiftedName = fnName.substr(0, fnName.length - 17);
+      print('Setting up shifted/unshifted for ' + fnName + '/' + unshiftedName);
+      var shiftedFn = wego3[fnName];
+      var unshiftedFn = wego3[unshiftedName];
+      wego3[unshiftedName] = function (channel, control, value, status, group) {
+        if (wego3.shiftPressed) {
+          shiftedFn(channel, control, value, status, group);
+        } else {
+          unshiftedFn(channel, control, value, status, group);
+        }
+      };
+    })(fnName);
+  }
+}
