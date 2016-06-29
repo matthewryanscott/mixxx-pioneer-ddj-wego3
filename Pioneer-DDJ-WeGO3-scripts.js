@@ -249,6 +249,9 @@ wego3.hiResControl = function (functionName, controlName, callback, min, midMax,
       max = 4.0;
     }
     callback = function(fullValue, group) {
+      if (!!wego3.shiftPressed != !!shifted) {
+        return;
+      }
       if (!predicate || predicate()) {
         var newValue = script.absoluteNonLin(fullValue, min, midMax, max, 0, 0x3fff);
         if (groupNameFn) {
@@ -303,6 +306,7 @@ wego3.hiResControl('filterMidKnob', 'filterMid', 'nonlinear');
 wego3.hiResControl('filterMidKnob', 'pregain', 'nonlinear', 0.0, 1.0, 4.0, null, true);
 wego3.hiResControl('filterLowKnob', 'filterLow', 'nonlinear');
 wego3.hiResControl('deckFader', 'volume', 'linear');
+wego3.hiResControl('deckFader', 'volume', 'linear', 0.0, 1.0, null, null, true);
 
 
 
